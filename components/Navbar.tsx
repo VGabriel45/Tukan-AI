@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -31,7 +34,10 @@ const Navbar = () => {
             Pricing
           </a>
         </nav>
-        <button className="inline-flex items-center text-white bg-orange-500 border-0 py-1 px-3 focus:outline-none hover:bg-orange-600 rounded text-base mt-4 md:mt-0">
+        <button
+          onClick={() => router.push("/login")}
+          className="inline-flex items-center text-white bg-orange-500 border-0 py-1 px-3 focus:outline-none hover:bg-orange-600 rounded text-base mt-4 md:mt-0"
+        >
           Get started
           <svg
             fill="none"
