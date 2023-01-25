@@ -15,11 +15,13 @@ const SignUp = () => {
     };
     console.log(payload);
 
-    axios.post("http://localhost:3001/auth/signUp", payload).then((res) => {
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-    });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_PRODUCTION_API}/auth/signUp`, payload)
+      .then((res) => {
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      });
   };
 
   return (

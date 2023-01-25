@@ -9,14 +9,16 @@ const Login = () => {
   const submitForm = (e: any) => {
     e.preventDefault();
     const payload = { email: e.target[0].value, password: e.target[1].value };
-    axios.post("http://localhost:3001/auth/signIn", payload).then((res) => {
-      alert("User logged in, redirecting ...");
-      Cookies.set("accessToken", res.data.accessToken);
-      Cookies.set("refreshToken", res.data.refreshToken);
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
-    });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_PRODUCTION_API}/auth/signIn`, payload)
+      .then((res) => {
+        alert("User logged in, redirecting ...");
+        Cookies.set("accessToken", res.data.accessToken);
+        Cookies.set("refreshToken", res.data.refreshToken);
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      });
   };
 
   return (
