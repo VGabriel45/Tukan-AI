@@ -1,6 +1,10 @@
 import type { NextPage } from "next";
+import { useRecoilValue } from "recoil";
+import { loggedInUser } from "../state/recoil/atoms";
 
 const Home: NextPage = () => {
+  const user = useRecoilValue(loggedInUser);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">

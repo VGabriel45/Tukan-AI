@@ -16,7 +16,7 @@ const SignUp = () => {
     console.log(payload);
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_PRODUCTION_API}/auth/signUp`, payload)
+      .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/auth/signUp`, payload)
       .then((res) => {
         setTimeout(() => {
           router.push("/login");

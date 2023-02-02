@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 const Login = () => {
@@ -10,11 +10,12 @@ const Login = () => {
     e.preventDefault();
     const payload = { email: e.target[0].value, password: e.target[1].value };
     axios
-      .post(`${process.env.NEXT_PUBLIC_PRODUCTION_API}/auth/signIn`, payload)
+      .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/auth/signIn`, payload)
       .then((res) => {
         alert("User logged in, redirecting ...");
-        Cookies.set("accessToken", res.data.accessToken);
+        Cookies.set("accessToken", res.data.accessToken, { expires: 0.0001 });
         Cookies.set("refreshToken", res.data.refreshToken);
+        localStorage.setItem("loggedInUser", JSON.stringify(res?.data?.user));
         setTimeout(() => {
           router.push("/");
         }, 2000);
