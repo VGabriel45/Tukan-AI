@@ -9,6 +9,8 @@ const Navbar = () => {
   const [user, setUser] = useRecoilState(loggedInUser);
 
   useEffect(() => {
+    console.log(Cookies.get("accessToken"));
+
     const user = JSON.parse(
       localStorage.getItem("loggedInUser") || `{"username": null}`
     );
@@ -17,7 +19,7 @@ const Navbar = () => {
 
   const logout = async () => {
     localStorage.setItem("loggedInUser", JSON.stringify({ username: null }));
-    setUser({ username: null });
+    setUser({ username: null, email: null });
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
     router.push("/login");

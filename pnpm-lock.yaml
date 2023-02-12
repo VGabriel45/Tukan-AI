@@ -1,7 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@netlify/next': ^1.4.3
+  '@stripe/react-stripe-js': ^1.16.4
+  '@stripe/stripe-js': ^1.46.0
   '@types/js-cookie': ^3.0.2
   '@types/jsonwebtoken': ^9.0.1
   '@types/node': 18.11.3
@@ -26,7 +27,8 @@ specifiers:
   typescript: 4.9.4
 
 dependencies:
-  '@netlify/next': 1.4.3_next@13.1.6
+  '@stripe/react-stripe-js': 1.16.4_keartrz7uyerl3wkpjpue4xbhy
+  '@stripe/stripe-js': 1.46.0
   axios: 1.2.3
   dotenv: 16.0.3
   fs: 0.0.1-security
@@ -53,15 +55,6 @@ devDependencies:
   typescript: 4.9.4
 
 packages:
-
-  /@netlify/next/1.4.3_next@13.1.6:
-    resolution: {integrity: sha512-2O4qfDZMCltFWUZ1Ba2U3Ayf/d+Hifw8nUInv5hHitbl/fNfQpB4CQIgBCvry16ljHJ05uBWuIAmScSNY+zMcw==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      next: '>=12.2.0'
-    dependencies:
-      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-    dev: false
 
   /@next/env/13.1.6:
     resolution: {integrity: sha512-s+W9Fdqh5MFk6ECrbnVmmAOwxKQuhGMT7xXHrkYIBMBcTiOqNWhv5KbJIboKR5STXxNXl32hllnvKaffzFaWQg==}
@@ -204,6 +197,23 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@stripe/react-stripe-js/1.16.4_keartrz7uyerl3wkpjpue4xbhy:
+    resolution: {integrity: sha512-x+Zstd3mHctNbSATOdbA2rOVXqGhbLU1ziNgcWqYCaFXj2dPKzjkBiUJfDhoARJVXVGOts0oZ8teTkOFY/ZRzQ==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.46.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@stripe/stripe-js/1.46.0:
+    resolution: {integrity: sha512-dkm0zCEoRLu5rTnsIgwDf/QG2DKcalOT2dk1IVgMySOHWTChLyOvQwMYhEduGgLvyYWTwNhAUV4WOLPQvjwLwA==}
+    dev: false
 
   /@swc/helpers/0.4.14:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}

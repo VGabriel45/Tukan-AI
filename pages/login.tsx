@@ -13,7 +13,7 @@ const Login = () => {
       .post(`${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/auth/signIn`, payload)
       .then((res) => {
         alert("User logged in, redirecting ...");
-        Cookies.set("accessToken", res.data.accessToken, { expires: 0.0001 });
+        Cookies.set("accessToken", res.data.accessToken, { expires: 1 });
         Cookies.set("refreshToken", res.data.refreshToken);
         localStorage.setItem("loggedInUser", JSON.stringify(res?.data?.user));
         setTimeout(() => {
