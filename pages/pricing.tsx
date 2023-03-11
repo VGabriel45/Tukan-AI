@@ -16,7 +16,9 @@ const Pricing = () => {
       `${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/stripe/findCustomerByEmail`,
       { params: { email: user.email } }
     );
-    setUserSubscriptions(res.data?.data[0]?.subscriptions?.data);
+    const customerData = res.data?.data[0]?.subscriptions?.data;
+    customerData !== undefined &&
+      setUserSubscriptions(res.data?.data[0]?.subscriptions?.data);
   };
 
   return (

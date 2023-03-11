@@ -1,3 +1,4 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -8,13 +9,41 @@ const Navbar = () => {
   const router = useRouter();
   const [user, setUser] = useRecoilState(loggedInUser);
 
-  useEffect(() => {
-    console.log(Cookies.get("accessToken"));
+  const config = {
+    headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
+  };
 
+  useEffect(() => {
     const user = JSON.parse(
-      localStorage.getItem("loggedInUser") || `{"username": null}`
+      localStorage.getItem("loggedInUser") ||
+        `{"username": null, "email": null}`
     );
     setUser(user);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (Cookies.get("refreshToken")) {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/users/checkSession`,
+            config
+          )
+          .then((res) => {
+            if (res.status === 200) {
+              console.log("Session OK");
+            }
+          })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              refresh();
+            } else {
+              logout();
+            }
+          });
+      }
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const logout = async () => {
@@ -23,6 +52,25 @@ const Navbar = () => {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
     router.push("/login");
+  };
+
+  const refresh = async () => {
+    const refreshToken = Cookies.get("refreshToken");
+    const bodyParameters = {
+      refreshToken,
+    };
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_DEVELOPMENT_API}/auth/refresh`,
+        bodyParameters
+      )
+      .then((res) => {
+        Cookies.set("accessToken", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        logout();
+      });
   };
 
   return (
@@ -56,12 +104,15 @@ const Navbar = () => {
           </a>
         </nav>
         {user.username ? (
-          <button
-            onClick={() => logout}
-            className="text-white bg-gray-500 border-0 py-1 px-3"
-          >
-            Logout
-          </button>
+          <div>
+            <button
+              onClick={() => logout()}
+              className="text-white bg-gray-500 border-0 py-1 px-3"
+            >
+              Logout
+            </button>
+            User: {user.username}
+          </div>
         ) : (
           <button
             onClick={() => router.push("/login")}
